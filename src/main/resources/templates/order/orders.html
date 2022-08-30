@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/orders/search" method="post">
+    <input type="text" name="itemName">
+    <select name="status">
+        <option value="">--선택--</option>
+        <option value="ORDER">ORDER</option>
+        <option value="CANCEL">CANCEL</option>
+    </select>
+    <input type="submit" value="검색">
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>주문번호</td>
+            <td>이름</td>
+            <td>가격</td>
+            <td>주문시각</td>
+            <td>주문상태</td>
+            <td>주문취소</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="findOrders: ${findOrders}">
+            <td th:text="${findOrders.orderId}"></td>
+            <td th:text="${findOrders.itemName}"></td>
+            <td th:text="${findOrders.price}"></td>
+            <td th:text="${findOrders.orderDate}"></td>
+            <td th:text="${findOrders.orderStatus}"></td>
+            <td><a th:href="@{/order/cancel/{orderId}(orderId = ${findOrders.orderId})}">주문취소</a></td>
+        </tr>
+    </tbody>
+
+    <tbody>
+        <tr th:each="orders: ${orders}">
+            <td th:text="${orders.order.id}"></td>
+            <td th:text="${orders.item.name}"></td>
+            <td th:text="${orders.orderPrice}"></td>
+            <td th:text="${orders.order.orderDate}"></td>
+            <td th:text="${orders.order.orderStatus}"></td>
+            <td><a th:href="@{/order/cancel/{orderId}(orderId = ${orders.order.id})}">주문취소</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

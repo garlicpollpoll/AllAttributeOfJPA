@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/items" method="post">
+    <input type="checkbox" name="category" value="책"> 책
+    <input type="checkbox" name="category" value="앨범"> 앨범
+    <input type="checkbox" name="category" value="영화"> 영화
+    <br>
+    최소금액 <input type="number" name="priceGoe" placeholder="최소금액">
+    최대금액 <input type="number" name="priceLoe" placeholder="최대금액">
+    <br>
+    브랜드명 <input type="text" name="brandName" placeholder="브랜드명">
+    <br>
+    <input type="submit" value="찾기">
+</form>
+<table>
+    <thead>
+        <tr>
+            <td>상품명</td>
+            <td>가격</td>
+            <td>수량</td>
+            <td>브랜드이름</td>
+            <td>카테고리</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="items: ${items}">
+            <td><a th:text="${items.name}" th:href="@{/item/detail/{id}(id = ${items.id})}"></a></td>
+            <td th:text="${items.price}"></td>
+            <td th:text="${items.stockQuantity}"></td>
+            <td th:text="${items.brandName}"></td>
+            <td th:text="${items.category}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

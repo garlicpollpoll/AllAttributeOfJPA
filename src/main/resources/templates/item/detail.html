@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:each="id: ${id}">
+    <a th:href="@{/item/buy/{id}(id = ${id})}">주문하기</a> <br>
+    <form th:action="@{/item/comment/{id}(id = ${id})}" method="post">
+        <textarea rows="6" cols="20" name="comment"></textarea>
+        <input type="submit" value="댓글달기">
+    </form>
+    <div th:each="comments: ${comment}">
+        <p th:text="${comments.member.name}"></p>
+        <p th:text="${comments.comment}"></p>
+    </div>
+</div>
+</body>
+
